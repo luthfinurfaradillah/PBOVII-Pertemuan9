@@ -1,0 +1,48 @@
+class HewanPeternakan:
+    def __init__(self, nama, usia):
+        self._nama = nama  # atribut protected
+        self._usia = usia  # atribut protected
+
+    def bersuara(self):  # method dengan akses publik
+        return "Suara hewan generic"
+
+    def makan(self):  # method dengan akses publik
+        return "Makan"
+
+
+class Sapi(HewanPeternakan):
+    def __init__(self, nama, usia, produksi_susu):
+        super().__init__(nama, usia)
+        self.__produksi_susu = produksi_susu  # atribut private
+
+    def hasilkan_susu(self):  # method dengan akses publik
+        return f"Menghasilkan {self.__produksi_susu} liter susu"
+
+    def tidur(self, jam_tidur):  # overriding method
+        return f"{self._nama} si Sapi tidur selama {jam_tidur} jam di dalam kandang"
+
+
+class Ayam(HewanPeternakan):
+    def __init__(self, nama, usia, produksi_telur):
+        super().__init__(nama, usia)
+        self.__produksi_telur = produksi_telur  # atribut private
+
+    def bertelur(self):  # method dengan akses publik
+        return f"Bertelur {self.__produksi_telur} butir telur"
+
+    def tidur(self, jam_tidur=8):  # overloading method dengan parameter default
+        return f"{self._nama} si Ayam tidur selama {jam_tidur} jam di dalam kandang"
+
+
+# Program Utama
+sapi1 = Sapi("Bessie", 3, 5.2)
+print(sapi1.bersuara())           # Method diwariskan
+print(sapi1.makan())              # Method diwariskan
+print(sapi1.hasilkan_susu())      # Method unik untuk kelas Sapi
+print(sapi1.tidur(6))             # Method di-overriding
+
+ayam1 = Ayam("Cluck", 1, 10)
+print(ayam1.bersuara())           # Method diwariskan
+print(ayam1.makan())              # Method diwariskan
+print(ayam1.bertelur())           # Method unik untuk kelas Ayam
+print(ayam1.tidur())              # Method di-overloaded dengan parameter defaultP
